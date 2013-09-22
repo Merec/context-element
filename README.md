@@ -7,7 +7,7 @@ Usage
 ------------
 To easily add a context element to your item, add `data-toggle="contextElement"` to the element of your choice. Then add the `data-target` attribute with the ID or the class of the element that will be shown as context element.
 ```html
-<a href="#" data-toggle="contextElement" data-target="#contextMenuExample" data-leftClick="true">Click me!</a>
+<a href="#" data-toggle="contextElement" data-target="#contextMenuExample">Rightclick me!</a>
 ```
 
 More details
