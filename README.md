@@ -1,4 +1,6 @@
-context-menu
+Context Element
 ============
 
-Context menu solution for Bootstrap
+Context Element is a library to add a custom context element to any HTML element you want.
+
+Visit GitHub page for more details.
