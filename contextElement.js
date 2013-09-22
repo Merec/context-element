@@ -29,7 +29,7 @@
 		}
 
 		// Debug
-		this.debug = true;
+		this.debug = false;
 		this.debugOnlyConsole = true;
 
 		// Internal variables
