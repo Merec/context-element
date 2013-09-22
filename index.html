@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Bootstrap Context Menu</title>
+
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/flatly/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/github.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="lib/highlight.pack.js"></script>
+	<script type="text/javascript" src="../contextElement.js"></script>
+
+</head>
+<body data-spy="scroll" data-target="#scrollspy-nav" data-offset="20">
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">Context Menu</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav visible-xs">
+				<li><a href="#download">Download</a></li>
+				<li><a href="#demo">Demo</a></li>
+				<li><a href="#usage">Usage</a></li>
+				<li><a href="#changes">Changes</a></li>
+			</ul>
+			<ul class="nav navbar-nav hidden-xs">
+				<li><a href="http://www.merec.org">merec.org</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="https://github.com/Merec/context-menu"><i class="icon-github"></i> GitHub project</a></li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+</nav>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3">
+			<nav id="scrollspy-nav">
+				<div class="well well-small affix main-nav-container hidden-xs">
+					<ul class="nav">
+						<li><a href="#download"><i class="icon-caret-right"></i> Download</a></li>
+						<li><a href="#demo"><i class="icon-caret-right"></i> Demo</a></li>
+						<li><a href="#usage"><i class="icon-caret-right"></i> Usage</a></li>
+						<li><a href="#changes"><i class="icon-caret-right"></i> Changes</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="col-sm-9">
+
+			<h1 class="page-header" id="download">Download</h1>
+
+			Download from GitHub &nbsp; <a href="https://github.com/Merec/context-menu"><i class="icon-github"></i> GitHub project</a>
+
+			<h1 class="page-header" id="demo">Demo</h1>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">Default</div>
+						<div class="panel-body" data-toggle="contextElement" data-target="#demo1">
+							<small><span class="text-muted">Right click here</span></small>
+						</div>
+					</div>
+					<ul class="dropdown-menu" role="menu" id="demo1">
+						<li role="presentation" class="dropdown-header">Dropdown header</li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation" class="dropdown-header">Dropdown header</li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">A very large one</div>
+						<div class="panel-body" data-toggle="contextElement" data-target="#demo2">
+							<small><span class="text-muted">Right click here</span></small>
+						</div>
+					</div>
+					<ul class="dropdown-menu" role="menu" id="demo2">
+						<li role="presentation" class="dropdown-header">Dropdown header</li>
+						<li role="presentation" class="dropdown-submenu">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown 2</a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-submenu">
+									<a href="#">More options</a>
+									<ul class="dropdown-menu">
+										<li><a href="#">Second level link</a></li>
+										<li><a href="#">Second level link</a></li>
+										<li><a href="#">Second level link</a></li>
+										<li><a href="#">Second level link</a></li>
+										<li><a href="#">Second level link</a></li>
+									</ul>
+								</li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li class="dropdown-header">Another header</li>
+								<li><a href="#">Separated link</a></li>
+								<li><a href="#">One more separated link</a></li>
+							</ul>
+						</li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation" class="dropdown-header">Dropdown header</li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link 2</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link 3</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link 4</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link 5</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link 6</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link 7</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">Loaded via Ajax</div>
+						<div class="panel-body" id="ajaxExample">
+							<small><span class="text-muted">Right click here</span></small>
+						</div>
+					</div>
+				</div>
+
+				<script>
+					$(document).ready(function() {
+						$('#ajaxExample').contextElement({
+							source: 'ajax.html',
+							sourceLoadingText: function() {
+								return $('<div></div>').addClass('alert alert-success').html('<i class="icon-spinner icon-spin"></i> Loading ...');
+							}
+						});
+					});
+				</script>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">Something different</div>
+						<div class="panel-body" data-toggle="contextElement" data-target="#demo4">
+							<small><span class="text-muted">Right click here</span></small>
+						</div>
+					</div>
+					<img src="http://lorempixel.com/output/technics-q-c-300-300-5.jpg" alt="An image as context element" style="display: none;" id="demo4">
+				</div>
+				<div class="col-sm-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">Something different 2</div>
+						<div class="panel-body" data-toggle="contextElement" data-target="#demo5">
+							<small><span class="text-muted">Right click here</span></small>
+						</div>
+					</div>
+					<div class="panel panel-primary" id="demo5" style="display: none;">
+						<div class="panel-heading">Search here</div>
+						<div class="panel-body">
+							<iframe width="560" height="315" src="http://www.duckduckgo.com" frameborder="0"></iframe>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">Modal example</div>
+						<div class="panel-body" id="modalExample" data-toggle="contextElement" data-target="#demo6" data-modal="1">
+							<small><span class="text-muted">Right click here</span></small>
+						</div>
+					</div>
+					<div class="panel panel-primary" id="demo6" style="display: none;">
+						<div class="panel-heading">Modal context element <i class="pull-right icon-remove" style="cursor: pointer;" onclick="$('#modalExample').contextElement('hide');"></i></div>
+						<div class="panel-body">
+							<iframe width="560" height="315" src="//www.youtube.com/embed/V4UfAL9f74I" frameborder="0" allowfullscreen></iframe>
+						</div>
+						<div class="panel-footer text-right">
+							<a href="javascript: void(0);" onclick="$('#modalExample').contextElement('hide');" class="btn btn-sm btn-default"><i class="icon-remove"></i> Close</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel panel-info">
+				<div class="panel-heading">Please note</div>
+				<div class="panel-body">
+					If you are not using a <code>dropdown-menu</code> as context element, add <code>style="display: none;"</code> to the element you want to display.
+				</div>
+			</div>
+
+			<h1 class="page-header" id="usage">Usage</h1>
+
+			<h3>Via data-attributes</h3>
+
+			To easily add a context element to your item, add <code>data-toggle="contextElement"</code> to the element of your choice.
+			Then add the <code>data-target</code> attribute with the ID or the class of the element that will be shown as context element.
+
+			<pre><code class="html">&lt;a href="#" data-toggle="contextElement" data-target="#contextMenuExample" data-leftClick="true"&gt;Click me!&lt;/a&gt;</code></pre>
+
+			The target can be everything you want, but I prefer Bootstraps <code>dropdown-menu</code>.
+
+			<pre><code class="html">&lt;ul class="dropdown-menu" role="menu" id="contextMenuExample"&gt;
+	&lt;li role="presentation" class="dropdown-header"&gt;Dropdown header&lt;/li&gt;
+	&lt;li role="presentation"&gt;&lt;a role="menuitem" tabindex="-1" href="#"&gt;Action&lt;/a&gt;&lt;/li&gt;
+	&lt;li role="presentation"&gt;&lt;a role="menuitem" tabindex="-1" href="#"&gt;Second action&lt;/a&gt;&lt;/li&gt;
+	&lt;li role="presentation" class="divider"&gt;&lt;/li&gt;
+	&lt;li role="presentation" class="dropdown-header"&gt;Dropdown header&lt;/li&gt;
+	&lt;li role="presentation"&gt;&lt;a role="menuitem" tabindex="-1" href="#"&gt;An other action&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">Result</div>
+				<div class="panel-body">
+					<a href="#" onclick="return false;" data-toggle="contextElement" data-target="#contextMenuExample" data-leftClick="true" class="btn btn-default"><i class="icon-screenshot"></i> Click me!</a>
+					<ul class="dropdown-menu" role="menu" id="contextMenuExample">
+						<li role="presentation" class="dropdown-header">Dropdown header</li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Second action</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation" class="dropdown-header">Dropdown header</li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">An other action</a></li>
+					</ul>
+				</div>
+			</div>
+
+			Alternatively you can add <code>data-source="yourfile.html"</code> to load the context element via Ajax.
+
+			<h3>Via JavaScript</h3>
+
+			To add a context element to an element via JavaScript:
+			<pre><code class="javascript">$('#myExampleElement').contextElement({target: '#contextMenuExample'});</code></pre>
+
+			<h4>Methods</h4>
+
+			<strong><code>.contextElement('hide');</code></strong><br />
+			Hides the context element of the element immediately.
+			<pre><code class="javascript">$('[data-toggle="contextElement"]').each(function () {
+  $(this).contextElement('hide');
+})</code></pre>
+
+			<strong><code>.contextElement('hideIfNotModal');</code></strong><br />
+			Hides the context element of the element if it's not modal.
+			<pre><code class="javascript">$('[data-toggle="contextElement"]').each(function () {
+  $(this).contextElement('hideIfNotModal');
+})</code></pre>
+
+			<h4>Options</h4>
+
+			<strong>All options</strong> can be passed as <strong>data-attribute</strong>. You can use for example <code>data-modal="true"</code> or <code>data-leftClick="true"</code> on the parent element to add the modal or left click option to the element.<br /><br />
+
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th style="width: 150px;">Name</th>
+						<th>Type</th>
+						<th>Default</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>target</td>
+						<td>element</td>
+						<td>null</td>
+						<td>The target which will be shown as cotext element.</td>
+					</tr>
+					<tr>
+						<td>source</td>
+						<td>string or function</td>
+						<td>null</td>
+						<td>If source is a string, the content file be loaded via Ajax. If source is a function, the returned content will be displayed. You can paas parameters using the <code>ajax</code> option below. See <a href="#ajaxExample">Demo 3: Ajax example</a>.</td>
+					</tr>
+					<tr>
+						<td>sourceLoadingText</td>
+						<td>string or function</td>
+						<td>Loading ...</td>
+						<td>This is displayed until the source has been loaded. See <a href="#ajaxExample">Demo 3: Ajax example</a>.</td>
+					</tr>
+					<tr>
+						<td>displayTimeout</td>
+						<td>number</td>
+						<td>2500</td>
+						<td>Time in milliseconds until the client has to hover the context element. "0" disables this feature.</td>
+					</tr>
+					<tr>
+						<td>mouseOutTimeout</td>
+						<td>number</td>
+						<td>300</td>
+						<td>Time in milliseconds until the context element fades after leaving the opened element. "0" disables this feature.</td>
+					</tr>
+					<tr>
+						<td>modal</td>
+						<td>boolean</td>
+						<td>false</td>
+						<td>You need to close the context element manually. This option disabled <code>displayTimeout</code> and <code>mouseOutTimeout</code>. See <a href="#modalExample">Demo 6: Modal example</a>.</td>
+					</tr>
+					<tr>
+						<td>cursorMargin</td>
+						<td>number</td>
+						<td>5</td>
+						<td>Offset of pixels the context element is shown at the cursor.</td>
+					</tr>
+					<tr>
+						<td>leftClick</td>
+						<td>boolean</td>
+						<td>false</td>
+						<td>Trigger context element on left click.</td>
+					</tr>
+					<tr>
+						<td>middleClick</td>
+						<td>boolean</td>
+						<td>false</td>
+						<td>Trigger context element on middle click.</td>
+					</tr>
+					<tr>
+						<td>rightClick</td>
+						<td>boolean</td>
+						<td>true</td>
+						<td>Trigger context element on right click.</td>
+					</tr>
+					<tr>
+						<td>effect</td>
+						<td>string</td>
+						<td>fade</td>
+						<td>Open/close effect of the context element. Can be <code>fade</code> or <code>slide</code>.</td>
+					</tr>
+					<tr>
+						<td>effectDuration</td>
+						<td>number</td>
+						<td>150</td>
+						<td>Effect duration of the open/close animation.</td>
+					</tr>
+					<tr>
+						<td>touch</td>
+						<td>object</td>
+						<td colspan="2">The context element can handle touch events. <br />
+							Default:<pre><code class="javascript">{
+    cursorMargin: 20,
+    displayAfterTime: 500,
+    displayTimeout: 0
+}</code></pre>
+							<dl class="dl-horizontal">
+								<dt><code>cursorMargin</code></dt>
+								<dd>A bit large becuase of larger fingers, else the user may select the first item immediately.</dd>
+								<dt><code>displayAfterTime</code></dt>
+								<dd>Context menu will be shown after the client touches this amount of time on the element.</dd>
+								<dt><code>displayTimeout</code></dt>
+								<dd>The time the client has to select something. "0" disables the feature.</dd>
+							</dl>
+						</td>
+					</tr>
+					<tr>
+						<td>ajax</td>
+						<td>object</td>
+						<td colspan="2">
+							This options are taken for the ajax call of <code>source</code>. See jQuery's <code><a href="http://api.jquery.com/jQuery.inArray/">jQuery.ajax()</a></code> settings.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h4>Events</h4>
+
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th style="width: 150px;">Event Type</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>beforeDisplay.bs.contextElement</td>
+						<td>This event is fired right before the element will get visible.</td>
+					</tr>
+					<tr>
+						<td>onDisplay.bs.contextElement</td>
+						<td>This event is fired when the element is visible.</td>
+					</tr>
+					<tr>
+						<td>beforeHide.bs.contextElement</td>
+						<td>This event is fired before element will get invisible.</td>
+					</tr>
+					<tr>
+						<td>onHidden.bs.contextElement</td>
+						<td>This event is fired right after the element is invisible.</td>
+					</tr>
+					<tr>
+						<td>sourceLoading.bs.contextElement</td>
+						<td>This event is fired when the loading of the source has started.</td>
+					</tr>
+					<tr>
+						<td>sourceLoaded.bs.contextElement</td>
+						<td>This event is fired when the source is loaded.</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<pre><code class="javascript">$('#yourElement').on('beforeDisplay.bs.contextElement', function() {
+	alert("I'll get visible now!");
+});</code></pre>
+
+			If you want to use the events of the Ajax call (when using external source), you can use the events of jQuery's <code><a href="http://api.jquery.com/jQuery.ajax/">jQuery.ajax()</a></code> method on initialization.
+
+			<pre><code class="javascript">$('#yourElement').contextElement({
+	source: 'ajax.html',
+	ajax: {
+		error: function() {
+			alert('Something went wrong! Unable to get source!');
+		}
+	}
+});</code></pre>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">Events in action</div>
+				<div class="panel-body">
+					<a href="#" onclick="return false;" id="eventExampleLink" class="btn btn-default btn-block">Click me</a>
+					<textarea id="eventExampleResult" cols="30" rows="7" class="form-control"></textarea>
+					<script>
+						$('#eventExampleLink').contextElement({
+							source: 'ajax.html',
+							leftClick: true,
+							middleClick: true,
+							rightClick: true,
+							sourceLoadingText: function() {
+								return $('<div></div>').addClass('alert alert-success').html('<i class="icon-spinner icon-spin"></i> Loading ...');
+							}
+						})
+						.on('beforeDisplay.bs.contextElement', function() { $('#eventExampleResult').val($('#eventExampleResult').val() + "Fire beforeDisplay\n"); })
+						.on('onDisplay.bs.contextElement', function() { $('#eventExampleResult').val($('#eventExampleResult').val() + "Fire onDisplay\n"); })
+						.on('beforeHide.bs.contextElement', function() { $('#eventExampleResult').val($('#eventExampleResult').val() + "Fire beforeHide\n"); })
+						.on('onHidden.bs.contextElement', function() { $('#eventExampleResult').val($('#eventExampleResult').val() + "Fire onHidden\n"); })
+						.on('sourceLoading.bs.contextElement', function() { $('#eventExampleResult').val($('#eventExampleResult').val() + "Fire sourceLoading\n"); })
+						.on('sourceLoaded.bs.contextElement', function() { $('#eventExampleResult').val($('#eventExampleResult').val() + "Fire sourceLoaded\n"); });
+					</script>
+				</div>
+			</div>
+
+			<h1 class="page-header" id="changes">Changes</h1>
+
+			<h4>22-09-2013: 1.0-beta</h4>
+			Initial release.
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		hljs.initHighlightingOnLoad();
+	});
+</script>
+
+</body>
+</html>
