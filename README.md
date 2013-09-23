@@ -1,7 +1,8 @@
 ContextElement
 ============
 
-ContextElement is a jQuery plugin which allows you to add an element as context item to each HTML element you want. It was originally designed to extend [Twitter Bootstrap](http://getbootstrap.com/) but it also runs as standalone.
+ContextElement is a jQuery plugin which allows you to add an element as context item to any HTML element of your choice. It was originally designed to extend <a href="http://getbootstrap.com">Twitter Bootstrap</a> but it also runs as standalone.
+The events can be triggered by left-, right- or middle mouse click or by touch for touch supported devices.
 
 Usage
 ------------
@@ -12,9 +13,9 @@ To easily add a context element to your item, add `data-toggle="contextElement"`
 
 More details
 ------------
-For a detailed description of usage with demos, visit [ContextElement's GitHub page](http://merec.github.io/context-element).
+For a detailed description with demos, visit [ContextElement's GitHub page](http://merec.github.io/context-element).
 
 Changelog
 ------------
-#### 09-22-2013 1.0 beta
+#### 09-22-2013 1.0-beta
 Initial release.
