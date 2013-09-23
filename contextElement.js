@@ -1,10 +1,21 @@
 (function($) {
 	"use strict";
 
+	/**
+	 * All elements with this selector are using the context element
+	 *
+	 * @type {string}
+	 */
 	var identifier = '[data-toggle=contextElement]';
 
+	/**
+	 * Constructor
+	 *
+	 * @param element HTMLElement
+	 * @param options object
+	 * @constructor
+	 */
 	var ContextElement = function(element, options) {
-		var $this = this;
 		this.element = $(element);
 		this.options = $.extend({}, ContextElement.DEFAULTS, options);
 
@@ -14,11 +25,11 @@
 		if(this.element.attr('data-sourceLoadingText')) this.options.target = $(this.element.attr('data-source'));
 		if(this.element.attr('data-displayTimeout')) this.options.displayTimeout = parseInt(this.element.attr('data-displayTimeout'));
 		if(this.element.attr('data-mouseOutTimeout')) this.options.mouseOutTimeout = parseInt(this.element.attr('data-mouseOutTimeout'));
-		if(this.element.attr('data-modal')) this.options.cursorMargin = !!($.inArray([true, 1, 'on', 'true'], this.element.attr('data-modal')) !== false);
+		if(this.element.attr('data-modal')) this.options.cursorMargin = !!($.inArray([true, 1, '1', 'on', 'true'], this.element.attr('data-modal')) !== false);
 		if(this.element.attr('data-cursorMargin')) this.options.cursorMargin = parseInt(this.element.attr('data-cursorMargin'));
-		if(this.element.attr('data-leftClick')) this.options.leftClick = !!($.inArray([true, 1, 'on', 'true'], this.element.attr('data-leftClick')) !== false);
-		if(this.element.attr('data-middleClick')) this.options.middleClick = !!($.inArray([true, 1, 'on', 'true'], this.element.attr('data-middleClick')) !== false);
-		if(this.element.attr('data-rightClick')) this.options.rightClick = !!($.inArray([true, 1, 'on', 'true'], this.element.attr('data-rightClick')) !== false);
+		if(this.element.attr('data-leftClick')) this.options.leftClick = !!($.inArray([true, 1, '1', 'on', 'true'], this.element.attr('data-leftClick')) !== false);
+		if(this.element.attr('data-middleClick')) this.options.middleClick = !!($.inArray([true, 1, '1', 'on', 'true'], this.element.attr('data-middleClick')) !== false);
+		if(this.element.attr('data-rightClick')) this.options.rightClick = !!($.inArray([true, 1, '1', 'on', 'true'], this.element.attr('data-rightClick')) !== false);
 		if(this.element.attr('data-effect')) this.options.effect = this.element.attr('data-effect');
 		if(this.element.attr('data-effectDuration')) this.options.effectDuration = parseInt(this.element.attr('data-effectDuration'));
 
@@ -33,12 +44,12 @@
 		this.debugOnlyConsole = true;
 
 		// Internal variables
-		this.target = null;
-		this.targetPrepared = false;
-		this.sourceIsLoading = false;
-		this.gotTargetFromSource = false;
-		this.displayContextElement = false;
-		this.isTouchDevice = 'ontouchstart' in document.documentElement;
+		this.target = null; // This is displayed as context element
+		this.targetPrepared = false; // The target element is allready prepared
+		this.sourceIsLoading = false; // The target element is currently loading from source
+		this.gotTargetFromSource = false; // Got the target from source
+		this.displayContextElement = false; // due to the massive handle of clicks, we need to indicate which one will open the context element
+		this.isTouchDevice = 'ontouchstart' in document.documentElement; // True on touch devices
 
 		// Timer
 		this.displayTimeoutTimer = null;
@@ -53,6 +64,11 @@
 		}
 	};
 
+	/**
+	 * Default options
+	 *
+	 * @type {{target: null, source: null, sourceLoadingText: string, displayTimeout: number, mouseOutTimeout: number, modal: boolean, cursorMargin: number, leftClick: boolean, middleClick: boolean, rightClick: boolean, effect: string, effectDuration: number, touch: {cursorMargin: number, displayAfterTime: number, displayTimeout: number}, ajax: {}, events: {beforeDisplay: string, onDisplay: string, beforeHide: string, onHidden: string, sourceLoading: string, sourceLoaded: string}}}
+	 */
 	ContextElement.DEFAULTS = {
 		target: null,
 		source: null,
@@ -85,6 +101,11 @@
 		}
 	};
 
+	/**
+	 * Debug something, mostly used for touch testing
+	 *
+	 * @param message string
+	 */
 	ContextElement.prototype.debugMessage = function(message) {
 		if(!this.debug) return;
 		if(!this.debugOnlyConsole) {
@@ -93,6 +114,12 @@
 		console.log(message);
 	};
 
+	/**
+	 * Prepares the target that will be displayed. Loads source if set.
+	 *
+	 * @param e Event
+	 * @returns {boolean}
+	 */
 	ContextElement.prototype.prepareTarget = function(e) {
 		if(this.targetPrepared) return true;
 		var $this = this;
@@ -193,6 +220,11 @@
 		return true;
 	};
 
+	/**
+	 * Show the context element. Redirects to showTouch if its a touch device.
+	 *
+	 * @param e Event
+	 */
 	ContextElement.prototype.show = function(e) {
 		var $this = this;
 
@@ -236,6 +268,11 @@
 		this.display();
 	};
 
+	/**
+	 * Display the context element on a touch device
+	 *
+	 * @param e Event
+	 */
 	ContextElement.prototype.showTouch = function(e) {
 		var $this = this;
 
@@ -270,6 +307,11 @@
 		this.display();
 	};
 
+	/**
+	 * Handle touchmove event
+	 *
+	 * @param e Event
+	 */
 	ContextElement.prototype.touchmove = function(e) {
 		// Normally when moving while touching, the user wants to scroll
 		if(this.touchDisplayContextElementTimer != null) {
@@ -281,8 +323,8 @@
 	/**
 	 * Displays this.target at the position
 	 *
-	 * @param x
-	 * @param y
+	 * @param x int
+	 * @param y int
 	 */
 	ContextElement.prototype.display = function(x, y) {
 		if(!x && this.lastPointsToDisplayAt.x) {
@@ -364,6 +406,9 @@
 		}
 	};
 
+	/**
+	 * Hides the context element
+	 */
 	ContextElement.prototype.hide = function() {
 		if(!this.target || !this.target.is(':visible')) return;
 
@@ -395,6 +440,9 @@
 		this.element.trigger(this.options.events.onHidden);
 	};
 
+	/**
+	 * Hides the element only if it's not a modal one
+	 */
 	ContextElement.prototype.hideIfNotModal = function() {
 		if(!this.options.modal) {
 			this.hide();
