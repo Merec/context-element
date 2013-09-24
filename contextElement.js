@@ -30,13 +30,30 @@
 (function($) {
 	"use strict";
 
+	/**
+	 * All elements with this selector are using the context element
+	 *
+	 * @type {string}
+	 */
 	var identifier = '[data-toggle=contextElement]';
+	/**
+	 * All elements that are active by JavaScript manually
+	 *
+	 * @type {Array}
+	 */
 	var manual_elements = [];
 
-	var ContextMenu = function(element, options) {
+	/**
+	 * Constructor
+	 *
+	 * @param element HTMLElement
+	 * @param options object
+	 * @constructor
+	 */
+	var ContextElement = function(element, options) {
 		var $this = this;
 		this.element = $(element);
-		this.options = $.extend({}, ContextMenu.DEFAULTS, options);
+		this.options = $.extend({}, ContextElement.DEFAULTS, options);
 
 		// Pass data-attributes to options
 		if(this.element.attr('data-target')) this.options.target = $(this.element.attr('data-target'));
@@ -67,13 +84,13 @@
 		this.targetPrepared = false;
 		this.sourceIsLoading = false;
 		this.gotTargetFromSource = false;
-		this.displayContextMenu = false;
+		this.displayContextElement = false;
 		this.isTouchDevice = 'ontouchstart' in document.documentElement;
 
 		// Timer
 		this.displayTimeoutTimer = null;
 		this.mouseOutTimeoutTimer = null;
-		this.touchDisplayContextMenuTimer = true;
+		this.touchDisplayContextElementTimer = true;
 
 		// Don't show the browsers context element if rightClick is enabled
 		if(this.options.rightClick) {
@@ -94,7 +111,12 @@
 		}
 	};
 
-	ContextMenu.DEFAULTS = {
+	/**
+	 * Default options
+	 *
+	 * @type {{target: null, source: null, sourceLoadingText: string, displayTimeout: number, mouseOutTimeout: number, modal: boolean, cursorMargin: number, leftClick: boolean, middleClick: boolean, rightClick: boolean, effect: string, effectDuration: number, touch: {cursorMargin: number, displayAfterTime: number, displayTimeout: number}, ajax: {}, events: {beforeDisplay: string, onDisplay: string, beforeHide: string, onHidden: string, sourceLoading: string, sourceLoaded: string}}}
+	 */
+	ContextElement.DEFAULTS = {
 		target: null,
 		source: null,
 		sourceLoadingText: "Loading ...",
@@ -126,7 +148,12 @@
 		}
 	};
 
-	ContextMenu.prototype.debugMessage = function(message) {
+	/**
+	 * Debug something, mostly used for touch testing
+	 *
+	 * @param message string
+	 */
+	ContextElement.prototype.debugMessage = function(message) {
 		if(!this.debug) return;
 		if(!this.debugOnlyConsole) {
 			this.element.html(this.element.html() + message + "<br />");
@@ -134,7 +161,13 @@
 		console.log(message);
 	};
 
-	ContextMenu.prototype.prepareTarget = function(e) {
+	/**
+	 * Prepares the target that will be displayed. Loads source if set.
+	 *
+	 * @param e Event
+	 * @returns {boolean}
+	 */
+	ContextElement.prototype.prepareTarget = function(e) {
 		if(this.targetPrepared) return true;
 		var $this = this;
 
@@ -238,7 +271,12 @@
 		return true;
 	};
 
-	ContextMenu.prototype.show = function(e) {
+	/**
+	 * Show the context element. Redirects to showTouch if its a touch device.
+	 *
+	 * @param e Event
+	 */
+	ContextElement.prototype.show = function(e) {
 		var $this = this;
 
 		//Check if this is on touch devices
@@ -256,13 +294,13 @@
 			if(e.which == 1 && !this.options.leftClick) return;
 			if(e.which == 2 && !this.options.middleClick) return;
 			if(e.which == 3 && !this.options.rightClick) return;
-			this.displayContextMenu = true;
+			this.displayContextElement = true;
 			return;
 		}
 
 		// Now ne are in mouseup
-		// Check if displayContextMenu is valid
-		if(!this.displayContextMenu) return;
+		// Check if displayContextElement is valid
+		if(!this.displayContextElement) return;
 
 		// Set the current position
 		this.lastPointsToDisplayAt = {x: e.pageX, y: e.pageY};
@@ -274,14 +312,19 @@
 		}
 
 		// Yes we want to show it, reset the indicator
-		this.displayContextMenu = false;
+		this.displayContextElement = false;
 
 		// Show it!
 		// Get the position and do display
 		this.display();
 	};
 
-	ContextMenu.prototype.showTouch = function(e) {
+	/**
+	 * Show the context element on a touch device
+	 *
+	 * @param e Event
+	 */
+	ContextElement.prototype.showTouch = function(e) {
 		var $this = this;
 
 		// Special cases for touch devices
@@ -290,36 +333,41 @@
 			this.lastPointsToDisplayAt = {x: e.originalEvent.touches[0].pageX, y: e.originalEvent.touches[0].pageY};
 
 			if(this.options.touch.displayAfterTime) {
-				this.touchDisplayContextMenuTimer = window.setTimeout(function() {
-					$this.displayContextMenu = true;
-					$this.touchDisplayContextMenuTimer = null;
+				this.touchDisplayContextElementTimer = window.setTimeout(function() {
+					$this.displayContextElement = true;
+					$this.touchDisplayContextElementTimer = null;
 				}, this.options.touch.displayAfterTime);
 				return;
 			}
 		}
 
-		if(this.touchDisplayContextMenuTimer != null) {
-			window.clearTimeout(this.touchDisplayContextMenuTimer);
-			this.touchDisplayContextMenuTimer = null;
+		if(this.touchDisplayContextElementTimer != null) {
+			window.clearTimeout(this.touchDisplayContextElementTimer);
+			this.touchDisplayContextElementTimer = null;
 		}
 
 		// Check if we want to display the context element at this point
-		if(!this.displayContextMenu) {
+		if(!this.displayContextElement) {
 			return;
 		}
 
 		// Reset
-		this.displayContextMenu = false;
+		this.displayContextElement = false;
 
 		// Get the position and do display
 		this.display();
 	};
 
-	ContextMenu.prototype.touchmove = function(e) {
+	/**
+	 * Handle touchmove event
+	 *
+	 * @param e Event
+	 */
+	ContextElement.prototype.touchmove = function(e) {
 		// Normally when moving while touching, the user wants to scroll
-		if(this.touchDisplayContextMenuTimer != null) {
-			window.clearTimeout(this.touchDisplayContextMenuTimer);
-			this.touchDisplayContextMenuTimer = null;
+		if(this.touchDisplayContextElementTimer != null) {
+			window.clearTimeout(this.touchDisplayContextElementTimer);
+			this.touchDisplayContextElementTimer = null;
 		}
 	};
 
@@ -329,7 +377,7 @@
 	 * @param x
 	 * @param y
 	 */
-	ContextMenu.prototype.display = function(x, y) {
+	ContextElement.prototype.display = function(x, y) {
 		if(!x && this.lastPointsToDisplayAt.x) {
 			x = this.lastPointsToDisplayAt.x;
 		}
@@ -409,7 +457,10 @@
 		}
 	};
 
-	ContextMenu.prototype.hide = function() {
+	/**
+	 * Hides the context element
+	 */
+	ContextElement.prototype.hide = function() {
 		if(!this.target) return;
 
 		// Fire beforeHide
@@ -440,16 +491,19 @@
 		this.element.trigger(this.options.events.onHidden);
 	};
 
-	ContextMenu.prototype.hideIfNotModal = function() {
+	/**
+	 * Hides the element only if it's not a modal one
+	 */
+	ContextElement.prototype.hideIfNotModal = function() {
 		if(!this.options.modal) {
 			this.hide();
 		}
 	};
 
 	/**
-	 * Close all ContextMenus when click somewhere
+	 * Close all ContextElements when click somewhere
 	 */
-	function closeContextMenus(e) {
+	function closeContextElements(e) {
 		$(identifier).each(function() {
 			$(this).contextElement('hideIfNotModal', e);
 		});
@@ -467,9 +521,9 @@
 		return this.each(function() {
 			var $this = $(this);
 			var data = $this.data('bs.contextElement');
-			var options = $.extend({}, ContextMenu.DEFAULTS, $this.data(), typeof option == 'object' && option);
+			var options = $.extend({}, ContextElement.DEFAULTS, $this.data(), typeof option == 'object' && option);
 
-			if(!data) $this.data('bs.contextElement', (data = new ContextMenu(this, options)));
+			if(!data) $this.data('bs.contextElement', (data = new ContextElement(this, options)));
 			if(typeof option == 'string') data[option](e);
 
 			if(!e) {
@@ -484,7 +538,7 @@
 		});
 	};
 
-	$.fn.contextElement.Constructor = ContextMenu;
+	$.fn.contextElement.Constructor = ContextElement;
 
 	// CONTEXT NO CONFLICT
 	// ====================
@@ -497,7 +551,7 @@
 	// APPLY TO STANDARD CONTEXT ELEMENTS
 	// ===================================
 
-	$(document).on('mousedown.bs.contextElement.data-api', closeContextMenus).on('mousedown.bs.contextElement.data-api', identifier, function(e) {
+	$(document).on('mousedown.bs.contextElement.data-api', closeContextElements).on('mousedown.bs.contextElement.data-api', identifier, function(e) {
 		$(this).contextElement('show', e);
 	}).on('mouseup.bs.contextElement.data-api', identifier, function(e) {
 			$(this).contextElement('show', e);
