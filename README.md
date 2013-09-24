@@ -17,5 +17,9 @@ For a detailed description with demos, visit [ContextElement's GitHub page](http
 
 Changelog
 ------------
-#### 09-22-2013 1.0-beta
+#### 09-24-2013 1.0
+* Fixed context element positioning when `source` is set.
+* The option `source` can now be a function that returns HTML or Text.
+
+#### 09-22-2013 Beta
 Initial release.
