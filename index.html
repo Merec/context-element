@@ -144,18 +144,20 @@
 							<small><span class="text-muted">Right click here</span></small>
 						</div>
 					</div>
-				</div>
-
-				<script>
-					$(document).ready(function() {
-						$('#ajaxExample').contextElement({
-							source: 'ajax.html',
-							sourceLoadingText: function() {
-								return $('<div></div>').addClass('alert alert-success').html('<i class="icon-spinner icon-spin"></i> Loading ...');
-							}
+					<script>
+						$(document).ready(function() {
+							$('#ajaxExample').contextElement({
+								source: 'ajax.html',
+								sourceLoadingText: function() {
+									return $('<div></div>').addClass('alert alert-success').html('<i class="icon-spinner icon-spin"></i> Loading ...');
+								},
+								ajax: {
+									cache: false
+								}
+							});
 						});
-					});
-				</script>
+					</script>
+				</div>
 			</div>
 
 			<div class="row">
@@ -198,6 +200,27 @@
 							<a href="javascript: void(0);" onclick="$('#modalExample').contextElement('hide');" class="btn btn-sm btn-default"><i class="icon-remove"></i> Close</a>
 						</div>
 					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">OnDemand context</div>
+						<div class="panel-body" id="ondemandExample">
+							<small><span class="text-muted">Right click here</span></small>
+						</div>
+					</div>
+					<script>
+						$(document).ready(function() {
+							$('#ondemandExample').contextElement({
+								source: function() {
+									var date = new Date();
+									return $('<div></div>').addClass('alert alert-success').html('This is created on ' + date.toLocaleString());
+								}
+							});
+						});
+					</script>
 				</div>
 			</div>
 
@@ -479,8 +502,15 @@
 
 			<h1 class="page-header" id="changes">Changes</h1>
 
-			<h4>09-22-2013: 1.0-beta</h4>
-			<p>Initial release.</p>
+			<h4>09-24-2013: 1.0</h4>
+			<ul>
+				<li>Fixed context element positioning when <code>source</code> is set.</li>
+				<li>The option <code>source</code> can now be a function that returns HTML or Text.</li>
+				<li>Add demo of <a href="#ondemandExample">OnDemand context element</a> using a function as <code>source</code>.</li>
+			</ul>
+
+			<h4>09-22-2013: Beta</h4>
+			<p>Initial commit.</p>
 
 		</div>
 	</div>
