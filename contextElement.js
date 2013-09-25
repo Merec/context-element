@@ -24,7 +24,7 @@
 /**
  * Context Element
  *
- * @version 1.0
+ * @version 1.0.1
  * @author Merec (http://www.merec.org)
  */
 (function($) {
@@ -90,24 +90,13 @@
 		// Timer
 		this.displayTimeoutTimer = null;
 		this.mouseOutTimeoutTimer = null;
-		this.touchDisplayContextElementTimer = true;
+		this.touchDisplayTimeoutTimer = null;
 
 		// Don't show the browsers context element if rightClick is enabled
 		if(this.options.rightClick) {
 			this.element.on('contextmenu', function(e) {
 				e.preventDefault();
 			});
-		}
-
-		// If source is given, set target to a div and append the content there
-		if(this.options.source != null) {
-			/*
-			 this.target = $('<div></div>').css({
-			 display: 'none',
-			 position: 'absolute'
-			 });
-			 $(document.body).append(this.target);
-			 */
 		}
 	};
 
@@ -329,6 +318,8 @@
 	 * @param e Event
 	 */
 	ContextElement.prototype.showTouch = function(e) {
+		// Handle only two event types
+		if(e.type != 'touchstart' && e.type != 'touchend') return;
 		var $this = this;
 
 		// Special cases for touch devices
@@ -337,21 +328,25 @@
 			this.lastPointsToDisplayAt = {x: e.originalEvent.touches[0].pageX, y: e.originalEvent.touches[0].pageY};
 
 			if(this.options.touch.displayAfterTime) {
-				this.touchDisplayContextElementTimer = window.setTimeout(function() {
+				this.touchDisplayTimeoutTimer = window.setTimeout(function() {
 					$this.displayContextElement = true;
-					$this.touchDisplayContextElementTimer = null;
+					$this.touchDisplayTimeoutTimer = null;
 				}, this.options.touch.displayAfterTime);
 				return;
 			}
 		}
 
-		if(this.touchDisplayContextElementTimer != null) {
-			window.clearTimeout(this.touchDisplayContextElementTimer);
-			this.touchDisplayContextElementTimer = null;
+		if(this.touchDisplayTimeoutTimer != null) {
+			window.clearTimeout(this.touchDisplayTimeoutTimer);
+			this.touchDisplayTimeoutTimer = null;
 		}
 
 		// Check if we want to display the context element at this point
-		if(!this.displayContextElement) {
+		if(!this.displayContextElement) return;
+
+		// Prepare the target
+		if(!this.prepareTarget(e)) {
+			// Target is not ready, maybe it loaded via ajax
 			return;
 		}
 
@@ -369,9 +364,9 @@
 	 */
 	ContextElement.prototype.touchmove = function(e) {
 		// Normally when moving while touching, the user wants to scroll
-		if(this.touchDisplayContextElementTimer != null) {
-			window.clearTimeout(this.touchDisplayContextElementTimer);
-			this.touchDisplayContextElementTimer = null;
+		if(this.touchDisplayTimeoutTimer != null) {
+			window.clearTimeout(this.touchDisplayTimeoutTimer);
+			this.touchDisplayTimeoutTimer = null;
 		}
 	};
 
@@ -534,7 +529,13 @@
 				// This is initialized via JavaScript
 				$this.on('mousedown.bs.contextElement.data-api',function(e) {
 					$(this).contextElement('show', e);
-				}).on('mouseup.bs.contextElement.data-api', function(e) {
+				}).on('mouseup.bs.contextElement.data-api',function(e) {
+						$(this).contextElement('show', e);
+					}).on('touchstart.bs.contextElement.data-api',function(e) {
+						$(this).contextElement('show', e);
+					}).on('touchend.bs.contextElement.data-api',function(e) {
+						$(this).contextElement('show', e);
+					}).on('touchmove.bs.contextElement.data-api', function(e) {
 						$(this).contextElement('show', e);
 					});
 				manual_elements.push($this);
@@ -556,8 +557,8 @@
 	// ===================================
 
 	$(document).on('mousedown.bs.contextElement.data-api', closeContextElements).on('mousedown.bs.contextElement.data-api', identifier,function(e) {
-		$(this).contextElement('show', e);
-	}).on('mouseup.bs.contextElement.data-api', identifier,function(e) {
+			$(this).contextElement('show', e);
+		}).on('mouseup.bs.contextElement.data-api', identifier,function(e) {
 			$(this).contextElement('show', e);
 		}).on('touchstart.bs.contextElement.data-api', identifier,function(e) {
 			$(this).contextElement('show', e);
