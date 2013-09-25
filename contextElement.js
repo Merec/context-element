@@ -189,8 +189,12 @@
 
 					// Set the content
 					var newContent = $('<div></div>').css({display: 'none', position: 'absolute'}).html(loadingPlaceholder);
-					if(!this.target || this.target.length == 0) $(document.body).append(newContent);
-					else this.target.replaceWith(newContent);
+					if(!this.target || this.target.length == 0) {
+						$(document.body).append(newContent);
+					}
+					else {
+						this.target.replaceWith(newContent);
+					}
 					this.target = newContent;
 					this.display();
 				}
@@ -551,13 +555,13 @@
 	// APPLY TO STANDARD CONTEXT ELEMENTS
 	// ===================================
 
-	$(document).on('mousedown.bs.contextElement.data-api', closeContextElements).on('mousedown.bs.contextElement.data-api', identifier, function(e) {
+	$(document).on('mousedown.bs.contextElement.data-api', closeContextElements).on('mousedown.bs.contextElement.data-api', identifier,function(e) {
 		$(this).contextElement('show', e);
-	}).on('mouseup.bs.contextElement.data-api', identifier, function(e) {
+	}).on('mouseup.bs.contextElement.data-api', identifier,function(e) {
 			$(this).contextElement('show', e);
-		}).on('touchstart.bs.contextElement.data-api', identifier, function(e) {
+		}).on('touchstart.bs.contextElement.data-api', identifier,function(e) {
 			$(this).contextElement('show', e);
-		}).on('touchend.bs.contextElement.data-api', identifier, function(e) {
+		}).on('touchend.bs.contextElement.data-api', identifier,function(e) {
 			$(this).contextElement('show', e);
 		}).on('touchmove.bs.contextElement.data-api', identifier, function(e) {
 			$(this).contextElement('touchmove', e);
