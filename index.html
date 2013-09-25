@@ -6,7 +6,7 @@
 
 	<meta name="viewport" content="width=device-width">
 
-	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/readable/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/github.css" />
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
@@ -231,6 +231,13 @@
 				</div>
 			</div>
 
+			<div class="panel panel-info">
+				<div class="panel-heading">Touch devices</div>
+				<div class="panel-body">
+					If you want to display the context element on touch devices, start touching and hold for a half second. After stop touching, the context element appears.
+				</div>
+			</div>
+
 			<h1 class="page-header" id="download">Download</h1>
 
 			<p>
@@ -300,158 +307,162 @@
 				For example, to add the modal or left click option to the element, you could use <code>data-modal="true"</code> or <code>data-leftClick="true"</code> on the parent element.
 			</p>
 
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th style="width: 150px;">Name</th>
-						<th>Type</th>
-						<th>Default</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>target</td>
-						<td>element</td>
-						<td>null</td>
-						<td>The target which will be shown as context element.</td>
-					</tr>
-					<tr>
-						<td>source</td>
-						<td>string or function</td>
-						<td>null</td>
-						<td>
-							If source is a string, the content file be loaded via Ajax. If source is a function, the returned content will be displayed.
-							You can pass parameters using the <code>ajax</code> option listed below. See <a href="#ajaxExample">Demo 3: Ajax example</a>.
-						</td>
-					</tr>
-					<tr>
-						<td>sourceLoadingText</td>
-						<td>string or function</td>
-						<td>Loading ...</td>
-						<td>This is displayed until the source has been loaded. See <a href="#ajaxExample">Demo 3: Ajax example</a>.</td>
-					</tr>
-					<tr>
-						<td>displayTimeout</td>
-						<td>number</td>
-						<td>2500</td>
-						<td>Time in milliseconds until the client has to hover the context element. "0" disables this feature.</td>
-					</tr>
-					<tr>
-						<td>mouseOutTimeout</td>
-						<td>number</td>
-						<td>300</td>
-						<td>Time in milliseconds until the context element fades after leaving the opened element. "0" disables this feature.</td>
-					</tr>
-					<tr>
-						<td>modal</td>
-						<td>boolean</td>
-						<td>false</td>
-						<td>You need to close the context element manually. This option disabled <code>displayTimeout</code> and <code>mouseOutTimeout</code>. See
-							<a href="#modalExample">Demo 6: Modal example</a>.
-						</td>
-					</tr>
-					<tr>
-						<td>cursorMargin</td>
-						<td>number</td>
-						<td>5</td>
-						<td>Offset of pixels the context element is shown at the cursor.</td>
-					</tr>
-					<tr>
-						<td>leftClick</td>
-						<td>boolean</td>
-						<td>false</td>
-						<td>Show context element on left click.</td>
-					</tr>
-					<tr>
-						<td>middleClick</td>
-						<td>boolean</td>
-						<td>false</td>
-						<td>Show context element on middle click.</td>
-					</tr>
-					<tr>
-						<td>rightClick</td>
-						<td>boolean</td>
-						<td>true</td>
-						<td>Show context element on right click.</td>
-					</tr>
-					<tr>
-						<td>effect</td>
-						<td>string</td>
-						<td>fade</td>
-						<td>Open/close effect of the context element. Can be <code>fade</code> or <code>slide</code>.</td>
-					</tr>
-					<tr>
-						<td>effectDuration</td>
-						<td>number</td>
-						<td>150</td>
-						<td>Effect duration of the open/close animation.</td>
-					</tr>
-					<tr>
-						<td>touch</td>
-						<td>object</td>
-						<td colspan="2">The context element can handle touch events. <br />
-							Default:<pre><code class="javascript">{
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th style="width: 150px;">Name</th>
+							<th>Type</th>
+							<th>Default</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>target</td>
+							<td>element</td>
+							<td>null</td>
+							<td>The target which will be shown as context element.</td>
+						</tr>
+						<tr>
+							<td>source</td>
+							<td>string or function</td>
+							<td>null</td>
+							<td>
+								If source is a string, the content file be loaded via Ajax. If source is a function, the returned content will be displayed.
+								You can pass parameters using the <code>ajax</code> option listed below. See <a href="#ajaxExample">Demo 3: Ajax example</a>.
+							</td>
+						</tr>
+						<tr>
+							<td>sourceLoadingText</td>
+							<td>string or function</td>
+							<td>Loading ...</td>
+							<td>This is displayed until the source has been loaded. See <a href="#ajaxExample">Demo 3: Ajax example</a>.</td>
+						</tr>
+						<tr>
+							<td>displayTimeout</td>
+							<td>number</td>
+							<td>2500</td>
+							<td>Time in milliseconds until the client has to hover the context element. "0" disables this feature.</td>
+						</tr>
+						<tr>
+							<td>mouseOutTimeout</td>
+							<td>number</td>
+							<td>300</td>
+							<td>Time in milliseconds until the context element fades after leaving the opened element. "0" disables this feature.</td>
+						</tr>
+						<tr>
+							<td>modal</td>
+							<td>boolean</td>
+							<td>false</td>
+							<td>You need to close the context element manually. This option disabled <code>displayTimeout</code> and <code>mouseOutTimeout</code>. See
+								<a href="#modalExample">Demo 6: Modal example</a>.
+							</td>
+						</tr>
+						<tr>
+							<td>cursorMargin</td>
+							<td>number</td>
+							<td>5</td>
+							<td>Offset of pixels the context element is shown at the cursor.</td>
+						</tr>
+						<tr>
+							<td>leftClick</td>
+							<td>boolean</td>
+							<td>false</td>
+							<td>Show context element on left click.</td>
+						</tr>
+						<tr>
+							<td>middleClick</td>
+							<td>boolean</td>
+							<td>false</td>
+							<td>Show context element on middle click.</td>
+						</tr>
+						<tr>
+							<td>rightClick</td>
+							<td>boolean</td>
+							<td>true</td>
+							<td>Show context element on right click.</td>
+						</tr>
+						<tr>
+							<td>effect</td>
+							<td>string</td>
+							<td>fade</td>
+							<td>Open/close effect of the context element. Can be <code>fade</code> or <code>slide</code>.</td>
+						</tr>
+						<tr>
+							<td>effectDuration</td>
+							<td>number</td>
+							<td>150</td>
+							<td>Effect duration of the open/close animation.</td>
+						</tr>
+						<tr>
+							<td>touch</td>
+							<td>object</td>
+							<td colspan="2">The context element can handle touch events. <br />
+								Default:<pre><code class="javascript">{
     cursorMargin: 20,
     displayAfterTime: 500,
     displayTimeout: 0
 }</code></pre>
-							<dl class="dl-horizontal">
-								<dt><code>cursorMargin</code></dt>
-								<dd>In this case user uses his finger, which is bigger than a mouse cursor. That's why we have to set a bigger margin. If this would not be set, user might be selecting the first item immediately after touching the context element.</dd>
-								<dt><code>displayAfterTime</code></dt>
-								<dd>Context element will be shown after the client touches this amount of time on the element.</dd>
-								<dt><code>displayTimeout</code></dt>
-								<dd>The time the client has to select something. "0" disables the feature.</dd>
-							</dl>
-						</td>
-					</tr>
-					<tr id="optionAjax">
-						<td>ajax</td>
-						<td>object</td>
-						<td colspan="2">
-							These options are taken for the Ajax call of <code>source</code>. See <code><a href="http://api.jquery.com/jQuery.inArray/">jQuery.ajax()</a></code> settings.
-						</td>
-					</tr>
-				</tbody>
-			</table>
+								<dl class="dl-horizontal">
+									<dt><code>cursorMargin</code></dt>
+									<dd>In this case user uses his finger, which is bigger than a mouse cursor. That's why we have to set a bigger margin. If this would not be set, user might be selecting the first item immediately after touching the context element.</dd>
+									<dt><code>displayAfterTime</code></dt>
+									<dd>Context element will be shown after the client touches this amount of time on the element.</dd>
+									<dt><code>displayTimeout</code></dt>
+									<dd>The time the client has to select something. "0" disables the feature.</dd>
+								</dl>
+							</td>
+						</tr>
+						<tr id="optionAjax">
+							<td>ajax</td>
+							<td>object</td>
+							<td colspan="2">
+								These options are taken for the Ajax call of <code>source</code>. See <code><a href="http://api.jquery.com/jQuery.inArray/">jQuery.ajax()</a></code> settings.
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
 			<h4>Events</h4>
 
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th style="width: 150px;">Event Type</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>beforeDisplay.bs.contextElement</td>
-						<td>This event is fired right before the element gets visible.</td>
-					</tr>
-					<tr>
-						<td>onDisplay.bs.contextElement</td>
-						<td>This event is fired when the element is visible.</td>
-					</tr>
-					<tr>
-						<td>beforeHide.bs.contextElement</td>
-						<td>This event is fired before element gets invisible.</td>
-					</tr>
-					<tr>
-						<td>onHidden.bs.contextElement</td>
-						<td>This event is fired right after the element is invisible.</td>
-					</tr>
-					<tr>
-						<td>sourceLoading.bs.contextElement</td>
-						<td>This event is fired when the loading of the source has started.</td>
-					</tr>
-					<tr>
-						<td>sourceLoaded.bs.contextElement</td>
-						<td>This event is fired when the source is loaded.</td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th style="width: 150px;">Event Type</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>beforeDisplay.bs.contextElement</td>
+							<td>This event is fired right before the element gets visible.</td>
+						</tr>
+						<tr>
+							<td>onDisplay.bs.contextElement</td>
+							<td>This event is fired when the element is visible.</td>
+						</tr>
+						<tr>
+							<td>beforeHide.bs.contextElement</td>
+							<td>This event is fired before element gets invisible.</td>
+						</tr>
+						<tr>
+							<td>onHidden.bs.contextElement</td>
+							<td>This event is fired right after the element is invisible.</td>
+						</tr>
+						<tr>
+							<td>sourceLoading.bs.contextElement</td>
+							<td>This event is fired when the loading of the source has started.</td>
+						</tr>
+						<tr>
+							<td>sourceLoaded.bs.contextElement</td>
+							<td>This event is fired when the source is loaded.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
 			<pre><code class="javascript">$('#yourElement').on('beforeDisplay.bs.contextElement', function() {
 	alert("I'll get visible now!");
