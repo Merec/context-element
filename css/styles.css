@@ -1,6 +1,7 @@
 body {
   position: relative;
-  padding: 70px 0 50px; }
+  padding: 70px 0 50px;
+  background-color: #fdfdfd; }
 
 .page-header {
   padding-top: 80px;
